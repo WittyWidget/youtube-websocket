@@ -1,13 +1,15 @@
+# Use the official Bun image
 FROM oven/bun
+
+WORKDIR /src
 
 COPY . .
 
 RUN bun install
 
-RUN bun --version
+ENTRYPOINT ["bun", "run"]
 
-RUN ls -alh /src
+CMD ["src/index.ts"]
 
-RUN chmod -R 755 /src
-
-CMD ["bun", "src/index.ts"]
+# Expose the port that your app will be listening on
+EXPOSE 9906
